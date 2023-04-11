@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+</head>
+<body>
+    <style>
+        body{
+           padding: 0;
+           margin: 0;
+           font-family: sans-serif;
+        }
+
+        #bmi{
+            max-width: 100%;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #bmi .title {
+            text-align: center;
+        }
+
+        .mb-10px{
+            margin-bottom: 10px;
+        }
+        .mb-20px{
+            margin-bottom: 20px;
+        }
+
+        #bmi .wrapper .wrapper-input .wp-box{
+            padding: 20px 0;
+            padding-top: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #bmi .wrapper .wrapper-input .wp-box label{
+            margin-bottom: 10px; 
+        }
+
+        #bmi .wrapper .wrapper-input .wp-box input{
+            padding: 10px;
+            border-radius: 5px;
+            border:  1px solid #252525;
+        }
+
+    </style>
+
+    <section id="bmi">
+        <div class="wrapper">
+            <div class="title">
+                <h1>Check Your BMI</h1>
+             </div>
+             <div class="excerpt mb-20px">
+                <spam>Enter Your weight and height below to check your BMI results</spam>
+            </div>
+            <div class="wrapper-input">
+                <div class="wp-box">
+                    <label>Put your weight in here (KG)</label>
+                    <input id="inputBerat" type="number" min="0" type="text">
+                </div>
+                <div class="wp-box">
+                    <label>Put your height in here (CM)</label>
+                    <input id="inputTinggi" type="number" min="0" type="text">
+                </div>
+             </div>
+             <div class="wrapper-button mb-20px">
+                <button onclick="calculator()" type="button" id="button-calculate">Calculate BMI</button>
+             </div>
+             <div class="wrapper-result" id="result">
+                <spam></spam>
+             </div>
+        </div>
+    </section>
+    <script>
+       // let button = document.querySelector("#button-calculate")
+       // button.addEventListener("click", calculator )
+        function calculator() {
+            var inputBerat = document.getElementById("inputBerat").value
+            var inputTinggi = document.getElementById("inputTinggi").value
+            var resultElement = document.getElementById("result")
+
+            var beratBadan = inputBerat
+            var tinggiBadan = inputTinggi
+            var rumus = beratBadan / ( tinggiBadan / 100 ) ^ 2 // maksud dari panah atas = membulatkan bilangan koma ke nilai tertinggi
+            var maxUnder = 18.5
+            var maxNormal = 25
+            var maxOver = 30
+            
+            if ( rumus < maxUnder ) {
+                resultElement.innerHTML = `<span>Your BMI is ${ rumus } which mean You are UnderWeight</span>`
+            } else if ( (rumus >= maxUnder ) && (rumus < maxNormal) ) {
+                resultElement.innerHTML = `<span>Your BMI is ${ rumus } which mean You are NormalWeight</span>`
+            } else if ( (rumus >= maxNormal ) && (rumus < maxOver) ) {
+                resultElement.innerHTML = `<span>Your BMI is ${ rumus } which mean You are OverWeight</span>`
+            } else if ( rumus >= maxOver ) {
+                resultElement.innerHTML = `<span>Your BMI is ${ rumus } which mean You are Obsesity`
+            } 
+        }
+</script>
+</body>
+</html>
